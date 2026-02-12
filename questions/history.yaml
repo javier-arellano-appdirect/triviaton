@@ -1,0 +1,20 @@
+name: "History"
+types:
+  - history
+  - social
+questions:
+  - question: "In what year did World War II end?"
+    answer: "1945"
+    value: 200
+  - question: "Who was the first President of the United States?"
+    answer: "George Washington"
+    value: 400
+  - question: "What ancient wonder was located in Alexandria, Egypt?"
+    answer: "The Lighthouse of Alexandria (or Library of Alexandria)"
+    value: 600
+  - question: "In what year did the Berlin Wall fall?"
+    answer: "1989"
+    value: 800
+  - question: "Who wrote the Declaration of Independence?"
+    answer: "Thomas Jefferson"
+    value: 1000
