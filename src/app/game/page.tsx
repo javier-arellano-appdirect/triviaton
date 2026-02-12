@@ -83,19 +83,24 @@ export default function GamePage() {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '100vh',
-        background: '#1a1a2e',
+        background: 'linear-gradient(180deg, #060b2e 0%, #0e14b8 50%, #060b2e 100%)',
       }}>
         <Button
           onClick={handleEnterGame}
-          variant="gradient"
-          gradient={{ from: 'indigo', to: 'cyan' }}
+          variant="filled"
           style={{
             fontSize: 'clamp(1.5rem, 4vw, 3rem)',
             height: 'auto',
             padding: '1.5rem 4rem',
-            borderRadius: '1rem',
-            color: '#fff',
+            borderRadius: '0.5rem',
+            background: 'linear-gradient(135deg, #d4a843 0%, #b8942e 50%, #d4a843 100%)',
+            color: '#060b2e',
             lineHeight: 1.2,
+            fontWeight: 900,
+            letterSpacing: '0.05em',
+            border: '3px solid #f0d080',
+            boxShadow: '0 0 30px rgba(212, 168, 67, 0.3)',
+            textTransform: 'uppercase',
           }}
         >
           Enter Game
@@ -111,7 +116,7 @@ export default function GamePage() {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '100vh',
-        background: '#fff',
+        background: 'linear-gradient(180deg, #060b2e 0%, #0e14b8 50%, #060b2e 100%)',
       }}>
         <div style={{
           display: 'flex',
@@ -122,13 +127,15 @@ export default function GamePage() {
           height: '60vh',
           gap: '2rem',
         }}>
-          <Loader size={120} />
+          <Loader size={120} color="#d4a843" />
           <Text
             fw={800}
             ta="center"
             style={{
               fontSize: 'clamp(2rem, 5vw, 4rem)',
-              color: '#333',
+              color: '#d4a843',
+              textShadow: '2px 2px 6px rgba(0, 0, 0, 0.7)',
+              letterSpacing: '0.03em',
             }}
           >
             Waiting for game to start...
@@ -149,6 +156,7 @@ export default function GamePage() {
         minHeight: '100vh',
         padding: '1rem',
         gap: '1rem',
+        background: '#060b2e',
       }}>
         {/* Players row on top */}
         <PlayerScores players={context.players} />
@@ -188,6 +196,7 @@ export default function GamePage() {
         minHeight: '100vh', 
         padding: '1rem',
         gap: '1rem',
+        background: '#060b2e',
       }}>
         {/* Players row on top */}
         <PlayerScores players={context.players} />
@@ -198,8 +207,8 @@ export default function GamePage() {
             <GameBoard categories={context.categories} board={context.board} />
           ) : (
             <Stack align="center" justify="center">
-              <Loader size="xl" />
-              <Text>Setting up board...</Text>
+              <Loader size="xl" color="#d4a843" />
+              <Text style={{ color: '#d4a843', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)' }}>Setting up board...</Text>
             </Stack>
           )}
         </div>

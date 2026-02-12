@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Stack, Card, Text } from '@mantine/core';
+import { Text } from '@mantine/core';
 import { QuestionCategory, BoardCell } from '@/types/game';
 
 interface BoardAnimationProps {
@@ -51,71 +51,85 @@ export function BoardAnimation({ categories, board, onComplete }: BoardAnimation
 
   return (
     <div style={{ flex: 1, overflowX: 'auto' }}>
-      <div style={{ 
-        display: 'flex', 
-        gap: '0.6rem', 
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: `repeat(${board.length}, 1fr)`,
+        gap: '4px',
         minWidth: 'min-content',
-        justifyContent: 'center',
+        background: '#0c0c3c',
+        borderRadius: '0.5rem',
+        padding: '4px',
+        border: '3px solid #3a3a8a',
+        boxShadow: '0 0 40px rgba(10, 10, 80, 0.6), inset 0 0 30px rgba(0, 0, 0, 0.3)',
       }}>
         {board.map((column, colIndex) => (
-          <div 
-            key={colIndex} 
-            style={{ 
-              flex: '1 1 0', 
-              minWidth: 140,
+          <div
+            key={colIndex}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '4px',
               opacity: colIndex < revealedCategories ? 1 : 0,
               transform: colIndex < revealedCategories ? 'translateY(0)' : 'translateY(-20px)',
               transition: 'all 0.5s ease-out',
             }}
           >
-            <Card
-              padding="md"
-              withBorder
-              style={{ 
-                marginBottom: '0.6rem', 
-                textAlign: 'center', 
-                backgroundColor: '#1971c2',
+            {/* Category header */}
+            <div
+              style={{
+                textAlign: 'center',
+                backgroundColor: '#0e14b8',
                 minHeight: 80,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                padding: '0.5rem',
+                borderRadius: '2px',
+                boxShadow: 'inset 0 0 15px rgba(0, 0, 0, 0.3)',
               }}
             >
-              <Text fw={800} c="white" size="1.5rem" lh={1.2}>
+              <Text fw={800} c="white" size="1.4rem" lh={1.2}
+                style={{
+                  textTransform: 'uppercase',
+                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.6)',
+                  letterSpacing: '0.02em',
+                }}
+              >
                 {categories[colIndex]?.name || ''}
               </Text>
-            </Card>
-            
-            <Stack gap="sm">
-              {column.map((cell, rowIndex) => (
-                <Card
-                  key={rowIndex}
-                  padding="md"
-                  withBorder
-                  shadow="sm"
+            </div>
+
+            {/* Value cells */}
+            {column.map((cell, rowIndex) => (
+              <div
+                key={rowIndex}
+                style={{
+                  backgroundColor: '#0e14b8',
+                  textAlign: 'center',
+                  minHeight: 90,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '2px',
+                  boxShadow: 'inset 0 0 15px rgba(0, 0, 0, 0.3)',
+                  opacity: rowIndex < revealedRows ? 1 : 0,
+                  transform: rowIndex < revealedRows ? 'scale(1)' : 'scale(0.8)',
+                  transition: 'all 0.3s ease-out',
+                }}
+              >
+                <Text
+                  fw={800}
+                  size="2.2rem"
                   style={{
-                    backgroundColor: '#fff',
-                    textAlign: 'center',
-                    minHeight: 90,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    opacity: rowIndex < revealedRows ? 1 : 0,
-                    transform: rowIndex < revealedRows ? 'scale(1)' : 'scale(0.8)',
-                    transition: 'all 0.3s ease-out',
+                    fontVariantNumeric: 'tabular-nums',
+                    color: '#d4a843',
+                    textShadow: '2px 3px 4px rgba(0, 0, 0, 0.7)',
                   }}
                 >
-                  <Text 
-                    fw={800} 
-                    size="2.2rem" 
-                    c="blue"
-                    style={{ fontVariantNumeric: 'tabular-nums' }}
-                  >
-                    ${cell.value}
-                  </Text>
-                </Card>
-              ))}
-            </Stack>
+                  ${cell.value}
+                </Text>
+              </div>
+            ))}
           </div>
         ))}
       </div>

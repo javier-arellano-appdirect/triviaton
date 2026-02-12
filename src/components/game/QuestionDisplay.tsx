@@ -65,10 +65,11 @@ export function QuestionDisplay({ cell, isDouble, answerRevealed }: QuestionDisp
             style={{
               fontSize: 'clamp(4rem, 12vw, 10rem)',
               fontWeight: 900,
-              color: '#ffd700',
-              textShadow: '0 0 30px #ffd700, 0 0 60px #ffd700, 0 0 100px rgba(255, 215, 0, 0.4)',
+              color: '#d4a843',
+              textShadow: '0 0 30px rgba(212, 168, 67, 0.6), 0 0 60px rgba(212, 168, 67, 0.4), 3px 3px 6px rgba(0, 0, 0, 0.8)',
               textAlign: 'center',
               lineHeight: 1.1,
+              letterSpacing: '0.05em',
             }}
           >
             DOUBLE!
@@ -93,8 +94,8 @@ export function QuestionDisplay({ cell, isDouble, answerRevealed }: QuestionDisp
           style={{
             fontSize: 'clamp(2rem, 5vw, 4rem)',
             fontWeight: 900,
-            color: '#4dabf7',
-            textShadow: '0 0 20px rgba(77, 171, 247, 0.3)',
+            color: '#d4a843',
+            textShadow: '2px 2px 6px rgba(0, 0, 0, 0.7)',
           }}
         >
           ${cell.value}
@@ -117,11 +118,12 @@ export function QuestionDisplay({ cell, isDouble, answerRevealed }: QuestionDisp
         <Text
           style={{
             fontSize: 'clamp(2.5rem, 6vw, 5rem)',
-            fontWeight: 600,
+            fontWeight: 700,
             color: '#ffffff',
             textAlign: 'center',
             lineHeight: 1.3,
-            textShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
+            textShadow: '3px 3px 8px rgba(0, 0, 0, 0.7)',
+            textTransform: 'uppercase',
           }}
         >
           {cell.question}
@@ -134,9 +136,10 @@ export function QuestionDisplay({ cell, isDouble, answerRevealed }: QuestionDisp
               width: '100%',
               maxWidth: '80vw',
               padding: 'clamp(1.5rem, 3vw, 3rem)',
-              background: 'linear-gradient(135deg, #1971c2 0%, #1c7ed6 50%, #228be6 100%)',
-              borderRadius: '1rem',
-              boxShadow: '0 0 40px rgba(25, 113, 194, 0.5), 0 0 80px rgba(25, 113, 194, 0.2)',
+              background: 'linear-gradient(180deg, #0e14b8 0%, #0a0f8a 100%)',
+              borderRadius: '0.5rem',
+              border: '3px solid #d4a843',
+              boxShadow: '0 0 40px rgba(14, 20, 184, 0.5), 0 0 80px rgba(14, 20, 184, 0.2), inset 0 0 20px rgba(0, 0, 0, 0.3)',
               opacity: answerVisible ? 1 : 0,
               transform: answerVisible ? 'scale(1) translateY(0)' : 'scale(0.8) translateY(30px)',
               transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
@@ -149,7 +152,7 @@ export function QuestionDisplay({ cell, isDouble, answerRevealed }: QuestionDisp
                 color: '#ffffff',
                 textAlign: 'center',
                 lineHeight: 1.3,
-                textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)',
               }}
             >
               {cell.answer}
@@ -169,7 +172,7 @@ const overlayStyle: React.CSSProperties = {
   left: 0,
   right: 0,
   bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.95)',
+  background: 'linear-gradient(180deg, #060b2e 0%, #0e14b8 50%, #060b2e 100%)',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',

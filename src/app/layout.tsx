@@ -3,8 +3,8 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Triviaton - Jeopardy Game',
-  description: 'A Jeopardy-style trivia game for the family',
+  title: 'Triviaton - Trivia Game',
+  description: 'A trivia game for the family',
 };
 
 export default function RootLayout({

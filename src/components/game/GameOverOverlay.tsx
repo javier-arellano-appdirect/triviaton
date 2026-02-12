@@ -24,9 +24,8 @@ export function GameOverOverlay({ players }: GameOverOverlayProps) {
     }
   }, [revealedPlayers, sortedPlayers.length]);
 
-  // Generate emoji rain
-  const emojis = ['🎉', '🏆', '⭐', '🎊', '🌟', '✨', '🎈', '🎆'];
-  const emojiCount = 50;
+  // Generate sparkle particles
+  const sparkleCount = 60;
 
   return (
     <div
@@ -36,7 +35,7 @@ export function GameOverOverlay({ players }: GameOverOverlayProps) {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.95)',
+        background: 'linear-gradient(180deg, #060b2e 0%, #0e14b8 50%, #060b2e 100%)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -44,25 +43,37 @@ export function GameOverOverlay({ players }: GameOverOverlayProps) {
         overflow: 'hidden',
       }}
     >
-      {/* Emoji rain */}
-      {Array.from({ length: emojiCount }).map((_, i) => (
+      {/* Gold sparkle rain */}
+      {Array.from({ length: sparkleCount }).map((_, i) => (
         <div
           key={i}
           style={{
             position: 'absolute',
-            top: -50,
+            top: -20,
             left: `${Math.random() * 100}%`,
-            fontSize: `${20 + Math.random() * 30}px`,
+            width: `${4 + Math.random() * 8}px`,
+            height: `${4 + Math.random() * 8}px`,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, #d4a843 0%, rgba(212, 168, 67, 0) 70%)`,
+            boxShadow: '0 0 6px #d4a843',
             animation: `fall ${3 + Math.random() * 4}s linear infinite`,
             animationDelay: `${Math.random() * 5}s`,
+            opacity: 0.6 + Math.random() * 0.4,
           }}
-        >
-          {emojis[Math.floor(Math.random() * emojis.length)]}
-        </div>
+        />
       ))}
 
       <Stack gap="xl" align="center" style={{ zIndex: 1, maxWidth: 800 }}>
-        <Text size="80px" fw={900} c="white" ta="center">
+        <Text
+          size="80px"
+          fw={900}
+          ta="center"
+          style={{
+            color: '#d4a843',
+            textShadow: '3px 3px 8px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 168, 67, 0.3)',
+            letterSpacing: '0.05em',
+          }}
+        >
           Game Over!
         </Text>
 
@@ -85,39 +96,63 @@ export function GameOverOverlay({ players }: GameOverOverlayProps) {
                   <div
                     style={{
                       padding: '2rem',
-                      backgroundColor: '#ffd700',
-                      borderRadius: 16,
+                      background: 'linear-gradient(135deg, #d4a843 0%, #b8942e 50%, #d4a843 100%)',
+                      borderRadius: 8,
                       textAlign: 'center',
-                      border: '4px solid #fff',
+                      border: '3px solid #f0d080',
+                      boxShadow: '0 0 40px rgba(212, 168, 67, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1)',
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-                      <Text size="60px">🏆</Text>
-                      <Stack gap="xs" align="center">
-                        <Text size="50px" fw={900} c="black">
-                          {player.name}
-                        </Text>
-                        <Text size="40px" fw={700} c="black">
-                          ${player.score.toLocaleString()}
-                        </Text>
-                        <Text size="30px" fw={700} c="black">
-                          WINNER!
-                        </Text>
-                      </Stack>
-                      <Text size="60px">🏆</Text>
-                    </div>
+                    <Stack gap="xs" align="center">
+                      <Text
+                        size="50px"
+                        fw={900}
+                        style={{
+                          color: '#060b2e',
+                          textShadow: '1px 1px 2px rgba(255, 255, 255, 0.3)',
+                        }}
+                      >
+                        {player.name}
+                      </Text>
+                      <Text
+                        size="40px"
+                        fw={700}
+                        style={{ color: '#060b2e' }}
+                      >
+                        ${player.score.toLocaleString()}
+                      </Text>
+                      <Text
+                        size="30px"
+                        fw={900}
+                        style={{
+                          color: '#060b2e',
+                          letterSpacing: '0.15em',
+                        }}
+                      >
+                        WINNER
+                      </Text>
+                    </Stack>
                   </div>
                 ) : (
                   <div
                     style={{
                       padding: '1rem',
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                      borderRadius: 8,
+                      background: 'linear-gradient(180deg, #0e14b8 0%, #0a0f8a 100%)',
+                      borderRadius: 4,
                       textAlign: 'center',
+                      border: '2px solid #3a3a8a',
+                      boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.3)',
                     }}
                   >
-                    <Text size="30px" fw={700} c="white">
-                      {player.name} - ${player.score.toLocaleString()}
+                    <Text
+                      size="30px"
+                      fw={700}
+                      style={{
+                        color: '#ffffff',
+                        textShadow: '2px 2px 4px rgba(0, 0, 0, 0.6)',
+                      }}
+                    >
+                      {player.name} — ${player.score.toLocaleString()}
                     </Text>
                   </div>
                 )}
@@ -127,10 +162,10 @@ export function GameOverOverlay({ players }: GameOverOverlayProps) {
         </Stack>
       </Stack>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fall {
           to {
-            transform: translateY(100vh) rotate(360deg);
+            transform: translateY(100vh);
           }
         }
       `}</style>
