@@ -1,0 +1,20 @@
+name: "Sports"
+types:
+  - sports
+  - athletics
+questions:
+  - question: "How many players are on a basketball team on the court?"
+    answer: "Five"
+    value: 200
+  - question: "In which sport would you perform a 'slam dunk'?"
+    answer: "Basketball"
+    value: 400
+  - question: "Which country has won the most FIFA World Cup titles?"
+    answer: "Brazil"
+    value: 600
+  - question: "What is the diameter of a basketball hoop in inches?"
+    answer: "18 inches"
+    value: 800
+  - question: "Who holds the record for most Olympic gold medals?"
+    answer: "Michael Phelps"
+    value: 1000

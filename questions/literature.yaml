@@ -1,0 +1,20 @@
+name: "Literature"
+types:
+  - literature
+  - arts
+questions:
+  - question: "Who wrote 'Romeo and Juliet'?"
+    answer: "William Shakespeare"
+    value: 200
+  - question: "What is the first book in the Harry Potter series?"
+    answer: "Harry Potter and the Philosopher's Stone (or Sorcerer's Stone)"
+    value: 400
+  - question: "Who wrote '1984'?"
+    answer: "George Orwell"
+    value: 600
+  - question: "What is the name of the whale in 'Moby Dick'?"
+    answer: "Moby Dick"
+    value: 800
+  - question: "Who wrote 'Pride and Prejudice'?"
+    answer: "Jane Austen"
+    value: 1000

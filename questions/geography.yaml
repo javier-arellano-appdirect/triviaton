@@ -1,0 +1,20 @@
+name: "Geography"
+types:
+  - geography
+  - world
+questions:
+  - question: "What is the capital of France?"
+    answer: "Paris"
+    value: 200
+  - question: "Which is the longest river in the world?"
+    answer: "The Nile River"
+    value: 400
+  - question: "What is the smallest country in the world?"
+    answer: "Vatican City"
+    value: 600
+  - question: "Which desert is the largest hot desert in the world?"
+    answer: "The Sahara Desert"
+    value: 800
+  - question: "What is the deepest ocean trench?"
+    answer: "Mariana Trench"
+    value: 1000

@@ -1,0 +1,20 @@
+name: "Science"
+types:
+  - science
+  - stem
+questions:
+  - question: "What planet is known as the Red Planet?"
+    answer: "Mars"
+    value: 200
+  - question: "What is the chemical symbol for gold?"
+    answer: "Au"
+    value: 400
+  - question: "What is the powerhouse of the cell?"
+    answer: "Mitochondria"
+    value: 600
+  - question: "What is the speed of light in meters per second?"
+    answer: "299,792,458 m/s"
+    value: 800
+  - question: "What is the largest organ in the human body?"
+    answer: "Skin"
+    value: 1000

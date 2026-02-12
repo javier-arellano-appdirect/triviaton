@@ -1,0 +1,21 @@
+name: "Movies"
+types:
+  - movies
+  - entertainment
+  - pop-culture
+questions:
+  - question: "What 1994 film features the quote 'Life is like a box of chocolates'?"
+    answer: "Forrest Gump"
+    value: 200
+  - question: "Who directed 'Jurassic Park'?"
+    answer: "Steven Spielberg"
+    value: 400
+  - question: "What is the highest-grossing film of all time (unadjusted for inflation)?"
+    answer: "Avatar"
+    value: 600
+  - question: "Which film won the Academy Award for Best Picture in 2020?"
+    answer: "Parasite"
+    value: 800
+  - question: "Who played Jack Dawson in 'Titanic'?"
+    answer: "Leonardo DiCaprio"
+    value: 1000
