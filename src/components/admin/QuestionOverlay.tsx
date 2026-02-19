@@ -25,9 +25,20 @@ export function QuestionOverlay({
   const [incorrectPlayers, setIncorrectPlayers] = useState<string[]>([]);
   const [doubleResult, setDoubleResult] = useState<'correct' | 'incorrect' | null>(null);
   const [doublePlayerId, setDoublePlayerId] = useState<string | null>(null);
+  const [noOneAnswered, setNoOneAnswered] = useState(false);
+
+  const handleNoOneAnswered = () => {
+    setNoOneAnswered(true);
+    setCorrectPlayer(null);
+    setIncorrectPlayers([]);
+    setDoublePlayerId(null);
+    setDoubleResult(null);
+  };
 
   const handleSubmit = () => {
-    if (isDouble) {
+    if (noOneAnswered) {
+      onSubmitResults({ correct: null, incorrect: [] });
+    } else if (isDouble) {
       if (doublePlayerId && doubleResult) {
         onSubmitResults({ result: doubleResult, playerId: doublePlayerId });
       }
@@ -40,6 +51,7 @@ export function QuestionOverlay({
     setIncorrectPlayers([]);
     setDoubleResult(null);
     setDoublePlayerId(null);
+    setNoOneAnswered(false);
   };
 
   const toggleIncorrect = (playerId: string) => {
@@ -85,14 +97,15 @@ export function QuestionOverlay({
                     <Button
                       key={player.id}
                       variant={doublePlayerId === player.id ? 'filled' : 'outline'}
-                      onClick={() => setDoublePlayerId(player.id)}
+                      onClick={() => { setDoublePlayerId(player.id); setNoOneAnswered(false); }}
+                      disabled={noOneAnswered}
                     >
                       {player.name}
                     </Button>
                   ))}
                 </Stack>
 
-                {doublePlayerId && (
+                {doublePlayerId && !noOneAnswered && (
                   <Group grow>
                     <Button
                       color="green"
@@ -112,8 +125,18 @@ export function QuestionOverlay({
                 )}
 
                 <Button
+                  color="gray"
+                  variant={noOneAnswered ? 'filled' : 'outline'}
+                  onClick={handleNoOneAnswered}
+                  size="lg"
+                  fullWidth
+                >
+                  No one answered
+                </Button>
+
+                <Button
                   onClick={handleSubmit}
-                  disabled={!doublePlayerId || !doubleResult}
+                  disabled={!noOneAnswered && (!doublePlayerId || !doubleResult)}
                   size="lg"
                   fullWidth
                 >
@@ -129,7 +152,8 @@ export function QuestionOverlay({
                       key={player.id}
                       variant={correctPlayer === player.id ? 'filled' : 'outline'}
                       color="green"
-                      onClick={() => setCorrectPlayer(player.id === correctPlayer ? null : player.id)}
+                      onClick={() => { setCorrectPlayer(player.id === correctPlayer ? null : player.id); setNoOneAnswered(false); }}
+                      disabled={noOneAnswered}
                     >
                       {player.name}
                     </Button>
@@ -143,15 +167,25 @@ export function QuestionOverlay({
                       key={player.id}
                       label={player.name}
                       checked={incorrectPlayers.includes(player.id)}
-                      onChange={() => toggleIncorrect(player.id)}
-                      disabled={player.id === correctPlayer}
+                      onChange={() => { toggleIncorrect(player.id); setNoOneAnswered(false); }}
+                      disabled={noOneAnswered || player.id === correctPlayer}
                     />
                   ))}
                 </Stack>
 
                 <Button
+                  color="gray"
+                  variant={noOneAnswered ? 'filled' : 'outline'}
+                  onClick={handleNoOneAnswered}
+                  size="lg"
+                  fullWidth
+                >
+                  No one answered
+                </Button>
+
+                <Button
                   onClick={handleSubmit}
-                  disabled={!correctPlayer && incorrectPlayers.length === 0}
+                  disabled={!noOneAnswered && !correctPlayer && incorrectPlayers.length === 0}
                   size="lg"
                   fullWidth
                 >
