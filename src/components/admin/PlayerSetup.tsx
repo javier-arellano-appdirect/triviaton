@@ -50,7 +50,7 @@ export function PlayerSetup({ onConfirm }: PlayerSetupProps) {
         value={playerCount}
         onChange={handleCountChange}
         min={2}
-        max={6}
+        max={8}
         required
       />
 
