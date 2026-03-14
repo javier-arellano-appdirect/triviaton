@@ -29,11 +29,18 @@ export function QuestionOverlay({
   const wrongAnswerAudioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleNoOneAnswered = () => {
-    setNoOneAnswered(true);
-    setCorrectPlayer(null);
-    setIncorrectPlayers([]);
-    setDoublePlayerId(null);
-    setDoubleResult(null);
+    setNoOneAnswered(prev => {
+      const next = !prev;
+
+      if (next) {
+        setCorrectPlayer(null);
+        setIncorrectPlayers([]);
+        setDoublePlayerId(null);
+        setDoubleResult(null);
+      }
+
+      return next;
+    });
   };
 
   const handleSubmit = () => {
@@ -59,6 +66,21 @@ export function QuestionOverlay({
     setIncorrectPlayers(prev =>
       prev.includes(playerId) ? prev.filter(id => id !== playerId) : [...prev, playerId]
     );
+  };
+
+  const toggleCorrectPlayer = (playerId: string) => {
+    setCorrectPlayer(prev => {
+      const nextCorrectPlayer = prev === playerId ? null : playerId;
+
+      setIncorrectPlayers(currentIncorrectPlayers =>
+        nextCorrectPlayer
+          ? currentIncorrectPlayers.filter(id => id !== nextCorrectPlayer)
+          : currentIncorrectPlayers
+      );
+
+      return nextCorrectPlayer;
+    });
+    setNoOneAnswered(false);
   };
 
   const handlePlayWrongAnswerSound = () => {
@@ -194,7 +216,7 @@ export function QuestionOverlay({
                   size="lg"
                   fullWidth
                 >
-                  No one answered
+                  {noOneAnswered ? 'Undo "No one answered"' : 'No one answered'}
                 </Button>
 
                 <Button
@@ -212,16 +234,17 @@ export function QuestionOverlay({
                   Select Correct Player (optional)
                 </Title>
                 <SimpleGrid cols={2} spacing="sm">
-                  {players.map(player => (
+                  {players.map((player, index) => (
                     <Button
                       key={player.id}
-                      variant="filled"
+                      variant={correctPlayer === player.id ? 'filled' : 'outline'}
                       color="green"
-                      onClick={() => { setCorrectPlayer(player.id === correctPlayer ? null : player.id); setNoOneAnswered(false); }}
+                      onClick={() => toggleCorrectPlayer(player.id)}
                       disabled={noOneAnswered}
                       size="lg"
                       fullWidth
                       style={{
+                        gridColumn: players.length % 2 === 1 && index === players.length - 1 ? '1 / -1' : undefined,
                         border: correctPlayer === player.id ? '2px solid var(--mantine-color-green-9)' : '2px solid transparent',
                         opacity: correctPlayer && correctPlayer !== player.id ? 0.85 : 1,
                       }}
@@ -270,7 +293,7 @@ export function QuestionOverlay({
                   size="lg"
                   fullWidth
                 >
-                  No one answered
+                  {noOneAnswered ? 'Undo "No one answered"' : 'No one answered'}
                 </Button>
 
                 <Button
